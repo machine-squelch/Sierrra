@@ -1,61 +1,36 @@
-# Automatisch - Open Source Zapier Alternative
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-![Automatisch - Screenshot](https://user-images.githubusercontent.com/2501931/191562539-e42f6c34-03c7-4dc4-bcf9-7f9473a9c64f.png)
+## Getting Started
 
-🧐 Automatisch is a business automation tool that lets you connect different services like Twitter, Slack, and more to automate your business processes.
-
-💸 Automating your workflows doesn't have to be a difficult or expensive process. You also don't need any programming knowledge to use Automatisch.
-
-## Advantages
-
-There are other existing solutions in the market, like Zapier and Integromat, so you might be wondering why you should use Automatisch.
-
-✅ One of the main benefits of using Automatisch is that it allows you to store your data on your own servers, which is essential for businesses that handle sensitive user information and cannot risk sharing it with external cloud services. This is especially relevant for industries such as healthcare and finance, as well as for European companies that must adhere to the General Data Protection Regulation (GDPR).
-
-🤓 Your contributions are vital to the development of Automatisch. As an open-source software, anyone can have an impact on how it is being developed.
-
-💙 No vendor lock-in. If you ever decide that Automatisch is no longer helpful for your business, you can switch to any other provider, which will be easier than switching from the one cloud provider to another since you have all data and flexibility.
-
-## Documentation
-
-The official documentation can be found here: [https://automatisch.io/docs](https://automatisch.io/docs)
-
-## Installation
+First, run the development server:
 
 ```bash
-# Clone the repository
-git clone https://github.com/automatisch/automatisch.git
-
-# Go to the repository folder
-cd automatisch
-
-# Start
-docker compose up
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-You can use `user@automatisch.io` email address and `sample` password to login to Automatisch. Please do not forget to change your email and password from the settings page.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-For other installation types, you can check the [installation](https://automatisch.io/docs/guide/installation) guide.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Community Links
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- [Discord](https://discord.gg/dJSah9CVrC)
-- [Twitter](https://twitter.com/automatischio)
+## Learn More
 
-## Support
+To learn more about Next.js, take a look at the following resources:
 
-If you have any questions or problems, please visit our GitHub issues page, and we'll try to help you as soon as possible.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-[https://github.com/automatisch/automatisch/issues](https://github.com/automatisch/automatisch/issues)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## License
+## Deploy on Vercel
 
-Automatisch Community Edition (Automatisch CE) is an open-source software with the [AGPL-3.0 license](LICENSE.agpl).
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Automatisch Enterprise Edition (Automatisch EE) is a commercial offering with the [Enterprise license](LICENSE.enterprise).
-
-The Automatisch repository contains both AGPL-licensed and Enterprise-licensed files. We maintain a single repository to make development easier.
-
-All files that contain ".ee." in their name fall under the [Enterprise license](LICENSE.enterprise). All other files fall under the [AGPL-3.0 license](LICENSE.agpl).
-
-See the [LICENSE](LICENSE) file for more information.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

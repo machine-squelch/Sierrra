@@ -1,165 +1,211 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { PhoneIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { site } from "@/lib/site";
+import { Button } from "@/components/ui/Button";
 
-const navigation = [
-  { name: "Home", href: "/" },
-  {
-    name: "Services",
-    href: "/services",
-    children: [
-      { name: "RV Repair", href: "/services/rv-repair" },
-      { name: "RV Service & Maintenance", href: "/services/rv-service" },
-      { name: "Truck Service", href: "/services/truck-service" },
-    ],
-  },
-  { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
+const serviceAnchors = [
+  { name: "General Maintenance", anchor: "#general-maintenance" },
+  { name: "Suspension", anchor: "#suspension" },
+  { name: "Interior Appliance Repair", anchor: "#interior-appliance" },
+  { name: "Exterior & Cosmetic", anchor: "#exterior-cosmetic" },
+  { name: "Collision Repair", anchor: "#collision" },
+  { name: "Full Restorations", anchor: "#restorations" },
+  { name: "Hitches & Accessories", anchor: "#hitches" },
+  { name: "Solar & Batteries", anchor: "#solar" },
 ];
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>(null);
+
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    };
+  }, []);
+
+  function openDropdown() {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDropdownOpen(true);
+  }
+
+  function closeDropdown() {
+    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 150);
+  }
 
   return (
-    <header className="bg-primary text-white sticky top-0 z-50 shadow-lg">
-      {/* Top bar */}
-      <div className="bg-dark text-sm py-2">
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <span className="hidden sm:inline">
-            18968 Waylon Way, Sonora, CA 95370
-          </span>
-          <div className="flex items-center gap-4">
-            <a href="tel:2095327994" className="hover:text-secondary transition">
-              (209) 532-7994
-            </a>
-            <span className="hidden sm:inline text-gray-400">|</span>
-            <span className="hidden sm:inline text-gray-300">
-              Mon-Fri 8am-5:30pm · Sat 8am-2pm
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <span className="text-xl md:text-2xl font-extrabold text-gray-900 leading-tight">
+              Sierra{" "}
+              <span className="text-[#007bff]">Heavy Duty</span>
             </span>
+            <span className="block text-[10px] md:text-xs font-medium text-gray-500 tracking-wider -mt-0.5">
+              RV &amp; Truck Center
+            </span>
+          </Link>
+
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-8">
+            <Link
+              href="/"
+              className="text-sm font-medium text-gray-700 hover:text-[#007bff] transition-colors"
+            >
+              Home
+            </Link>
+
+            {/* Services dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={openDropdown}
+              onMouseLeave={closeDropdown}
+            >
+              <Link
+                href="/rv-service"
+                className="text-sm font-medium text-gray-700 hover:text-[#007bff] transition-colors flex items-center gap-1"
+              >
+                Services
+                <svg
+                  className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+              {dropdownOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-2 min-w-[240px] z-50">
+                  {serviceAnchors.map((s) => (
+                    <Link
+                      key={s.anchor}
+                      href={`/rv-service${s.anchor}`}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#007bff] transition-colors"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      {s.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
+              href="/#about"
+              className="text-sm font-medium text-gray-700 hover:text-[#007bff] transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className="text-sm font-medium text-gray-700 hover:text-[#007bff] transition-colors"
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Desktop CTA */}
+          <div className="hidden lg:flex items-center gap-4">
+            <a
+              href={`tel:${site.phone.primaryRaw}`}
+              className="flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-[#007bff] transition-colors"
+            >
+              <PhoneIcon className="w-4 h-4 text-[#007bff]" />
+              {site.phone.primary}
+            </a>
+            <Button href="/contact" size="sm">
+              Request Service
+            </Button>
+          </div>
+
+          {/* Mobile: phone + hamburger */}
+          <div className="flex lg:hidden items-center gap-3">
+            <a
+              href={`tel:${site.phone.primaryRaw}`}
+              className="p-2 text-[#007bff]"
+              aria-label="Call us"
+            >
+              <PhoneIcon className="w-6 h-6" />
+            </a>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 text-gray-700"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileOpen ? (
+                <XMarkIcon className="w-6 h-6" />
+              ) : (
+                <Bars3Icon className="w-6 h-6" />
+              )}
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Main nav */}
-      <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tight">
-          <span className="text-secondary">Sierra</span> Heavy Duty
-          <span className="block text-xs font-normal text-gray-300 tracking-wider">
-            RV &amp; Truck Center
-          </span>
-        </Link>
-
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {navigation.map((item) =>
-            item.children ? (
-              <div
-                key={item.name}
-                className="relative"
-                onMouseEnter={() => setServicesOpen(true)}
-                onMouseLeave={() => setServicesOpen(false)}
-              >
-                <button className="hover:text-secondary transition font-medium">
-                  {item.name}
-                </button>
-                {servicesOpen && (
-                  <div className="absolute top-full left-0 mt-2 bg-white text-gray-900 rounded-lg shadow-xl py-2 min-w-[220px]">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.name}
-                        href={child.href}
-                        className="block px-4 py-2 hover:bg-gray-100 transition"
-                      >
-                        {child.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="hover:text-secondary transition font-medium"
-              >
-                {item.name}
-              </Link>
-            )
-          )}
-          <a
-            href="tel:2095327994"
-            className="bg-secondary text-dark px-5 py-2 rounded-lg font-semibold hover:bg-secondary-light transition"
-          >
-            Call Now
-          </a>
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden p-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            {mobileMenuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
-        </button>
-      </nav>
-
       {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-primary-light border-t border-white/10 pb-4">
-          {navigation.map((item) => (
-            <div key={item.name}>
-              <Link
-                href={item.href}
-                className="block px-6 py-3 hover:bg-white/10 transition"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-              {item.children?.map((child) => (
-                <Link
-                  key={child.name}
-                  href={child.href}
-                  className="block px-10 py-2 text-sm text-gray-300 hover:bg-white/10 transition"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {child.name}
-                </Link>
-              ))}
-            </div>
-          ))}
-          <div className="px-6 pt-3">
-            <a
-              href="tel:2095327994"
-              className="block text-center bg-secondary text-dark px-5 py-3 rounded-lg font-semibold"
+      {mobileOpen && (
+        <nav className="lg:hidden bg-white border-t border-gray-100 pb-4">
+          <Link
+            href="/"
+            className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50"
+            onClick={() => setMobileOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            href="/rv-service"
+            className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50"
+            onClick={() => setMobileOpen(false)}
+          >
+            Services
+          </Link>
+          {serviceAnchors.map((s) => (
+            <Link
+              key={s.anchor}
+              href={`/rv-service${s.anchor}`}
+              className="block px-10 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-[#007bff]"
+              onClick={() => setMobileOpen(false)}
             >
-              Call (209) 532-7994
-            </a>
+              {s.name}
+            </Link>
+          ))}
+          <Link
+            href="/#about"
+            className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50"
+            onClick={() => setMobileOpen(false)}
+          >
+            About
+          </Link>
+          <Link
+            href="/contact"
+            className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50"
+            onClick={() => setMobileOpen(false)}
+          >
+            Contact
+          </Link>
+          <div className="px-6 pt-3 space-y-2">
+            <Button
+              href={`tel:${site.phone.primaryRaw}`}
+              variant="secondary"
+              size="md"
+              className="w-full"
+            >
+              <PhoneIcon className="w-5 h-5" />
+              Call {site.phone.primary}
+            </Button>
+            <Button href="/contact" size="md" className="w-full">
+              Request Service
+            </Button>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

@@ -1,34 +1,46 @@
 import { Button } from "@/components/ui/Button";
+import { site } from "@/lib/site";
+import { PhoneIcon } from "@heroicons/react/24/solid";
 
 export function Hero() {
   return (
-    <section className="relative bg-primary text-white">
-      {/* Background overlay - will hold a background image later */}
-      <div className="absolute inset-0 bg-gradient-to-r from-dark/90 to-primary/70" />
+    <section className="relative bg-gray-900 text-white overflow-hidden">
+      {/* Background gradient — swap for a real hero image via CSS background-image */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-[#007bff]/30" />
+      <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-20" />
 
-      <div className="relative max-w-7xl mx-auto px-4 py-24 md:py-36">
+      <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-32">
         <div className="max-w-2xl">
-          <p className="text-secondary font-semibold mb-4 text-lg">
-            Serving the Sierra Nevada Foothills Since the 1950s
-          </p>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-            Expert RV &amp; Truck
-            <br />
-            <span className="text-secondary">Repair &amp; Service</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+            RV Repair, Maintenance, Parts &amp; Accessories in{" "}
+            <span className="text-[#007bff]">Sonora, CA</span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            Family-owned and operated in Sonora, CA. From routine maintenance to
-            full restorations, we keep your RV and heavy-duty truck running
-            strong.
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+            Expert service for RV repairs, hitches, solar, batteries, collision
+            work, and more from a trusted family-owned Sonora shop.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Button href="/contact" variant="primary" size="lg">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button href="/contact" size="lg">
               Request Service
             </Button>
-            <Button href="tel:2095327994" variant="outline" size="lg">
-              Call (209) 532-7994
+            <Button
+              href={`tel:${site.phone.primaryRaw}`}
+              variant="outline"
+              size="lg"
+            >
+              <PhoneIcon className="w-5 h-5" />
+              Call {site.phone.primary}
             </Button>
           </div>
+          <p className="mt-4 text-sm text-gray-400">
+            Second line:{" "}
+            <a
+              href={`tel:${site.phone.secondaryRaw}`}
+              className="text-gray-300 hover:text-white underline transition-colors"
+            >
+              {site.phone.secondary}
+            </a>
+          </p>
         </div>
       </div>
     </section>

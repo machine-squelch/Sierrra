@@ -2,16 +2,21 @@ import Link from "next/link";
 
 type ButtonProps = {
   href?: string;
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
   className?: string;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+  external?: boolean;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">;
 
 const variants = {
-  primary: "bg-secondary text-dark hover:bg-secondary-light",
-  secondary: "bg-primary text-white hover:bg-primary-light",
-  outline: "border-2 border-white text-white hover:bg-white hover:text-dark",
+  primary:
+    "bg-[#007bff] text-white hover:bg-[#0069d9] active:bg-[#0062cc] shadow-sm",
+  secondary:
+    "bg-white text-[#007bff] border-2 border-[#007bff] hover:bg-[#007bff] hover:text-white",
+  outline:
+    "bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900",
+  ghost: "bg-transparent text-[#007bff] hover:bg-blue-50",
 };
 
 const sizes = {
@@ -26,11 +31,19 @@ export function Button({
   size = "md",
   children,
   className = "",
+  external,
   ...props
 }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center rounded-lg font-semibold transition-colors ${variants[variant]} ${sizes[size]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 cursor-pointer ${variants[variant]} ${sizes[size]} ${className}`;
 
   if (href) {
+    if (external || href.startsWith("tel:") || href.startsWith("mailto:")) {
+      return (
+        <a href={href} className={classes}>
+          {children}
+        </a>
+      );
+    }
     return (
       <Link href={href} className={classes}>
         {children}

@@ -1,160 +1,148 @@
 import type { Metadata } from "next";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
+import { ContactForm } from "@/components/sections/ContactForm";
+import { site } from "@/lib/site";
+import {
+  PhoneIcon,
+  EnvelopeIcon,
+  MapPinIcon,
+  ClockIcon,
+} from "@heroicons/react/24/outline";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact Us",
   description:
-    "Contact Sierra Heavy Duty RV & Truck Center in Sonora, CA. Call (209) 532-7994 or visit us at 18968 Waylon Way. Request a service appointment today.",
+    "Contact Sierra Heavy Duty RV & Truck Center in Sonora, CA. Request service, get an estimate, or ask a question. Call (209) 532-7994 or fill out our form.",
 };
 
 export default function ContactPage() {
   return (
     <>
-      {/* Page Header */}
-      <section className="bg-primary text-white py-16">
+      {/* Page hero */}
+      <section className="bg-gray-900 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-xl text-gray-300 max-w-2xl">
-            Get in touch to schedule a service appointment, request an estimate,
-            or ask a question. We&apos;re here to help.
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-3">
+            Contact Us
+          </h1>
+          <p className="text-lg text-gray-300 max-w-2xl">
+            Request a service appointment, get an estimate, or just ask a
+            question. We&apos;re here to help.
           </p>
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
-            <div>
-              <SectionHeading
-                title="Request Service"
-                subtitle="Fill out the form below and we'll get back to you within one business day."
-                centered={false}
-              />
-              <form className="mt-8 space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none"
-                      placeholder="(209) 555-0000"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none"
-                    placeholder="you@example.com"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">
-                    Service Needed
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none"
-                  >
-                    <option value="">Select a service...</option>
-                    <option value="rv-repair">RV Repair</option>
-                    <option value="rv-service">RV Service &amp; Maintenance</option>
-                    <option value="truck-service">Truck Service</option>
-                    <option value="parts">Parts &amp; Accessories</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none resize-y"
-                    placeholder="Describe your vehicle and the service you need..."
-                  />
-                </div>
-                <Button type="submit" variant="primary" size="lg">
-                  Send Request
-                </Button>
-              </form>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+            {/* Form — takes 3 columns */}
+            <div className="lg:col-span-3">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                Request Service
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Fill out the form and we&apos;ll get back to you within one
+                business day. For urgent needs, call us directly.
+              </p>
+              <ContactForm />
             </div>
 
-            {/* Contact Info & Map */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-xl font-bold text-dark mb-4">
-                  Visit Our Shop
-                </h3>
-                <address className="not-italic text-gray-600 space-y-2">
-                  <p className="font-medium text-dark">
-                    Sierra Heavy Duty RV &amp; Truck Center
+            {/* Sidebar — takes 2 columns */}
+            <aside className="lg:col-span-2 space-y-8">
+              {/* Phone */}
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-[#007bff]">
+                  <PhoneIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">Call Us</h3>
+                  <p>
+                    <a
+                      href={`tel:${site.phone.primaryRaw}`}
+                      className="text-[#007bff] font-semibold text-lg hover:underline"
+                    >
+                      {site.phone.primary}
+                    </a>
                   </p>
-                  <p>18968 Waylon Way</p>
-                  <p>Sonora, CA 95370</p>
-                </address>
+                  <p>
+                    <a
+                      href={`tel:${site.phone.secondaryRaw}`}
+                      className="text-gray-600 hover:text-[#007bff] transition-colors"
+                    >
+                      {site.phone.secondary}
+                    </a>
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-xl font-bold text-dark mb-4">
-                  Call Us
-                </h3>
-                <p>
-                  <a href="tel:2095327994" className="text-primary font-semibold text-lg hover:text-primary-light transition">
-                    (209) 532-7994
+              {/* Email */}
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-[#007bff]">
+                  <EnvelopeIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="text-[#007bff] hover:underline"
+                  >
+                    {site.email}
                   </a>
-                </p>
-                <p>
-                  <a href="tel:2095328229" className="text-primary font-semibold text-lg hover:text-primary-light transition">
-                    (209) 532-8229
+                </div>
+              </div>
+
+              {/* Address */}
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-[#007bff]">
+                  <MapPinIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">Visit Us</h3>
+                  <a
+                    href={site.address.googleMapsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-[#007bff] transition-colors"
+                  >
+                    {site.address.street}
+                    <br />
+                    {site.address.city}, {site.address.state} {site.address.zip}
                   </a>
-                </p>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-xl font-bold text-dark mb-4">
-                  Business Hours
-                </h3>
-                <table className="text-gray-600 text-sm">
-                  <tbody>
-                    <tr><td className="pr-8 py-1 font-medium">Monday - Friday</td><td>8:00 AM - 5:30 PM</td></tr>
-                    <tr><td className="pr-8 py-1 font-medium">Saturday</td><td>8:00 AM - 2:00 PM</td></tr>
-                    <tr><td className="pr-8 py-1 font-medium">Sunday</td><td>Closed</td></tr>
-                  </tbody>
-                </table>
+              {/* Hours */}
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-[#007bff]">
+                  <ClockIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">Hours</h3>
+                  <dl className="text-sm text-gray-600 space-y-1">
+                    {site.hours.map((h) => (
+                      <div key={h.day} className="flex gap-4">
+                        <dt className="w-24 font-medium text-gray-700">
+                          {h.day}
+                        </dt>
+                        <dd>{h.time}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="bg-gray-200 rounded-xl aspect-video flex items-center justify-center text-gray-400">
-                <span className="text-lg">Google Maps Embed</span>
+              {/* Map */}
+              <div className="rounded-xl overflow-hidden border border-gray-200">
+                <iframe
+                  title="Sierra Heavy Duty RV & Truck Center location"
+                  src={site.address.googleMapsEmbed}
+                  width="100%"
+                  height="250"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>

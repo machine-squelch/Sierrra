@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sierra Heavy Duty RV & Truck Center — Website
+
+Production website for [sierraheavyduty.com](https://sierraheavyduty.com), built with Next.js 16, TypeScript, and Tailwind CSS v4.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router, Server Components)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Icons:** Heroicons
+- **Validation:** Zod
+- **SEO:** JSON-LD structured data, dynamic sitemap, robots.txt
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout (Header + Footer + JSON-LD)
+│   ├── page.tsx            # Homepage
+│   ├── rv-service/page.tsx # Full services page
+│   ├── contact/page.tsx    # Contact page with form
+│   ├── not-found.tsx       # 404 page
+│   ├── robots.ts           # robots.txt generation
+│   ├── sitemap.ts          # sitemap.xml generation
+│   └── globals.css         # Global styles
+├── components/
+│   ├── layout/
+│   │   ├── Header.tsx      # Sticky nav with services dropdown
+│   │   └── Footer.tsx      # Footer with contact info & hours
+│   ├── ui/
+│   │   ├── Button.tsx      # Reusable CTA button
+│   │   ├── SectionHeading.tsx
+│   │   ├── ServiceCard.tsx
+│   │   └── ReviewCard.tsx
+│   └── sections/
+│       ├── Hero.tsx
+│       ├── ServicesGrid.tsx
+│       ├── TrustSection.tsx
+│       ├── FAQ.tsx
+│       ├── CTABanner.tsx
+│       └── ContactForm.tsx # Client component with Zod validation
+└── lib/
+    ├── site.ts             # Business info (address, phones, hours)
+    ├── schema.ts           # JSON-LD generators (LocalBusiness, FAQ)
+    ├── validation.ts       # Zod schemas for form data
+    └── reviews.ts          # Review data (ready for Google Places API)
+```
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage — hero, services grid, trust signals, reviews, FAQ, CTA |
+| `/rv-service` | Detailed service page with 8 service sections and anchor nav |
+| `/contact` | Contact form (Zod-validated), map embed, hours, phone/email |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Vercel (recommended)
 
-## Deploy on Vercel
+```bash
+npx vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Static Export
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+# Output in .next/ — deploy to any static host
+```
+
+### Docker
+
+```bash
+docker build -t sierra-heavy-duty .
+docker run -p 3000:3000 sierra-heavy-duty
+```
+
+## Customization
+
+### Business Info
+Edit `src/lib/site.ts` to update address, phone numbers, hours, and social links.
+
+### Hero Image
+Place a hero background image at `public/images/hero-bg.jpg`. The hero section uses it as a CSS background with an overlay.
+
+### Reviews
+Edit `src/lib/reviews.ts` to update placeholder reviews, or integrate with the Google Places API for live reviews.
+
+### Contact Form
+The form currently simulates submission. Connect it to your backend API, email service (Resend, SendGrid), or form provider (Formspree, Basin).
+
+## Build
+
+```bash
+npm run build
+```
+
+All pages are statically generated for maximum performance.

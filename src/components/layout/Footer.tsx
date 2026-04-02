@@ -1,107 +1,131 @@
 import Link from "next/link";
-
-const services = [
-  { name: "RV Repair", href: "/services/rv-repair" },
-  { name: "RV Service & Maintenance", href: "/services/rv-service" },
-  { name: "Truck Service", href: "/services/truck-service" },
-];
-
-const quickLinks = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
-  { name: "Contact", href: "/contact" },
-];
+import { site } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="bg-dark text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-gray-900 text-gray-400">
+      <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <h3 className="text-white text-lg font-bold mb-4">
-              <span className="text-secondary">Sierra</span> Heavy Duty
+            <h3 className="text-white text-lg font-bold mb-3">
+              Sierra <span className="text-[#007bff]">Heavy Duty</span>
             </h3>
             <p className="text-sm leading-relaxed">
-              Family-owned RV &amp; truck repair center serving the Sierra
-              Nevada foothills since the 1950s. Your trusted partner for all RV
-              and heavy-duty truck needs.
+              Family-owned RV &amp; truck repair center in Sonora, CA. Trusted
+              by the Sierra Nevada foothills community for over 70 years of
+              combined industry experience.
             </p>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Our Services</h4>
+            <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
+              Services
+            </h4>
             <ul className="space-y-2 text-sm">
-              {services.map((service) => (
-                <li key={service.name}>
+              {[
+                "General Maintenance",
+                "Suspension Repair",
+                "Interior Appliance Repair",
+                "Collision Repair",
+                "Full Restorations",
+                "Solar & Batteries",
+              ].map((s) => (
+                <li key={s}>
                   <Link
-                    href={service.href}
-                    className="hover:text-secondary transition"
+                    href="/rv-service"
+                    className="hover:text-white transition-colors"
                   >
-                    {service.name}
+                    {s}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Contact */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-secondary transition"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Contact Us</h4>
+            <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
+              Contact
+            </h4>
             <address className="not-italic text-sm space-y-2">
-              <p>18968 Waylon Way</p>
-              <p>Sonora, CA 95370</p>
-              <p className="pt-2">
+              <p>
                 <a
-                  href="tel:2095327994"
-                  className="text-secondary hover:text-secondary-light transition"
+                  href={site.address.googleMapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
                 >
-                  (209) 532-7994
+                  {site.address.street}
+                  <br />
+                  {site.address.city}, {site.address.state} {site.address.zip}
                 </a>
               </p>
               <p>
                 <a
-                  href="tel:2095328229"
-                  className="text-secondary hover:text-secondary-light transition"
+                  href={`tel:${site.phone.primaryRaw}`}
+                  className="text-[#007bff] hover:text-blue-400 transition-colors font-medium"
                 >
-                  (209) 532-8229
+                  {site.phone.primary}
                 </a>
               </p>
-              <div className="pt-2 text-xs">
-                <p>Mon-Fri: 8:00am - 5:30pm</p>
-                <p>Sat: 8:00am - 2:00pm</p>
-                <p>Sun: Closed</p>
-              </div>
+              <p>
+                <a
+                  href={`tel:${site.phone.secondaryRaw}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {site.phone.secondary}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {site.email}
+                </a>
+              </p>
             </address>
+          </div>
+
+          {/* Hours */}
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
+              Hours
+            </h4>
+            <dl className="text-sm space-y-1">
+              {site.hours.map((h) => (
+                <div key={h.day} className="flex justify-between gap-4">
+                  <dt className="font-medium text-gray-300">{h.day}</dt>
+                  <dd>{h.time}</dd>
+                </div>
+              ))}
+            </dl>
+            {site.social.facebook && (
+              <a
+                href={site.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-4 text-sm hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+                Facebook
+              </a>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-6 text-center text-xs text-gray-500">
+      <div className="border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
           <p>
-            &copy; {new Date().getFullYear()} Sierra Heavy Duty RV &amp; Truck
-            Center. All rights reserved.
+            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
+          <p>{site.tagline}</p>
         </div>
       </div>
     </footer>

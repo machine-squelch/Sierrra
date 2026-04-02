@@ -1,61 +1,112 @@
-# Automatisch - Open Source Zapier Alternative
+# Sierra Heavy Duty RV & Truck Center — Website
 
-![Automatisch - Screenshot](https://user-images.githubusercontent.com/2501931/191562539-e42f6c34-03c7-4dc4-bcf9-7f9473a9c64f.png)
+Production website for [sierraheavyduty.com](https://sierraheavyduty.com), built with Next.js 16, TypeScript, and Tailwind CSS v4.
 
-🧐 Automatisch is a business automation tool that lets you connect different services like Twitter, Slack, and more to automate your business processes.
+## Tech Stack
 
-💸 Automating your workflows doesn't have to be a difficult or expensive process. You also don't need any programming knowledge to use Automatisch.
+- **Framework:** Next.js 16 (App Router, Server Components)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Icons:** Heroicons
+- **Validation:** Zod
+- **SEO:** JSON-LD structured data, dynamic sitemap, robots.txt
 
-## Advantages
-
-There are other existing solutions in the market, like Zapier and Integromat, so you might be wondering why you should use Automatisch.
-
-✅ One of the main benefits of using Automatisch is that it allows you to store your data on your own servers, which is essential for businesses that handle sensitive user information and cannot risk sharing it with external cloud services. This is especially relevant for industries such as healthcare and finance, as well as for European companies that must adhere to the General Data Protection Regulation (GDPR).
-
-🤓 Your contributions are vital to the development of Automatisch. As an open-source software, anyone can have an impact on how it is being developed.
-
-💙 No vendor lock-in. If you ever decide that Automatisch is no longer helpful for your business, you can switch to any other provider, which will be easier than switching from the one cloud provider to another since you have all data and flexibility.
-
-## Documentation
-
-The official documentation can be found here: [https://automatisch.io/docs](https://automatisch.io/docs)
-
-## Installation
+## Getting Started
 
 ```bash
-# Clone the repository
-git clone https://github.com/automatisch/automatisch.git
+# Install dependencies
+npm install
 
-# Go to the repository folder
-cd automatisch
-
-# Start
-docker compose up
+# Start development server
+npm run dev
 ```
 
-You can use `user@automatisch.io` email address and `sample` password to login to Automatisch. Please do not forget to change your email and password from the settings page.
+Open [http://localhost:3000](http://localhost:3000).
 
-For other installation types, you can check the [installation](https://automatisch.io/docs/guide/installation) guide.
+## Project Structure
 
-## Community Links
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout (Header + Footer + JSON-LD)
+│   ├── page.tsx            # Homepage
+│   ├── rv-service/page.tsx # Full services page
+│   ├── contact/page.tsx    # Contact page with form
+│   ├── not-found.tsx       # 404 page
+│   ├── robots.ts           # robots.txt generation
+│   ├── sitemap.ts          # sitemap.xml generation
+│   └── globals.css         # Global styles
+├── components/
+│   ├── layout/
+│   │   ├── Header.tsx      # Sticky nav with services dropdown
+│   │   └── Footer.tsx      # Footer with contact info & hours
+│   ├── ui/
+│   │   ├── Button.tsx      # Reusable CTA button
+│   │   ├── SectionHeading.tsx
+│   │   ├── ServiceCard.tsx
+│   │   └── ReviewCard.tsx
+│   └── sections/
+│       ├── Hero.tsx
+│       ├── ServicesGrid.tsx
+│       ├── TrustSection.tsx
+│       ├── FAQ.tsx
+│       ├── CTABanner.tsx
+│       └── ContactForm.tsx # Client component with Zod validation
+└── lib/
+    ├── site.ts             # Business info (address, phones, hours)
+    ├── schema.ts           # JSON-LD generators (LocalBusiness, FAQ)
+    ├── validation.ts       # Zod schemas for form data
+    └── reviews.ts          # Review data (ready for Google Places API)
+```
 
-- [Discord](https://discord.gg/dJSah9CVrC)
-- [Twitter](https://twitter.com/automatischio)
+## Pages
 
-## Support
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage — hero, services grid, trust signals, reviews, FAQ, CTA |
+| `/rv-service` | Detailed service page with 8 service sections and anchor nav |
+| `/contact` | Contact form (Zod-validated), map embed, hours, phone/email |
 
-If you have any questions or problems, please visit our GitHub issues page, and we'll try to help you as soon as possible.
+## Deployment
 
-[https://github.com/automatisch/automatisch/issues](https://github.com/automatisch/automatisch/issues)
+### Vercel (recommended)
 
-## License
+```bash
+npx vercel
+```
 
-Automatisch Community Edition (Automatisch CE) is an open-source software with the [AGPL-3.0 license](LICENSE.agpl).
+### Static Export
 
-Automatisch Enterprise Edition (Automatisch EE) is a commercial offering with the [Enterprise license](LICENSE.enterprise).
+```bash
+npm run build
+# Output in .next/ — deploy to any static host
+```
 
-The Automatisch repository contains both AGPL-licensed and Enterprise-licensed files. We maintain a single repository to make development easier.
+### Docker
 
-All files that contain ".ee." in their name fall under the [Enterprise license](LICENSE.enterprise). All other files fall under the [AGPL-3.0 license](LICENSE.agpl).
+```bash
+docker build -t sierra-heavy-duty .
+docker run -p 3000:3000 sierra-heavy-duty
+```
 
-See the [LICENSE](LICENSE) file for more information.
+## Customization
+
+### Business Info
+Edit `src/lib/site.ts` to update address, phone numbers, hours, and social links.
+
+### Hero Image
+Place a hero background image at `public/images/hero-bg.jpg`. The hero section uses it as a CSS background with an overlay.
+
+### Reviews
+Edit `src/lib/reviews.ts` to update placeholder reviews, or integrate with the Google Places API for live reviews.
+
+### Contact Form
+The form currently simulates submission. Connect it to your backend API, email service (Resend, SendGrid), or form provider (Formspree, Basin).
+
+## Build
+
+```bash
+npm run build
+```
+
+All pages are statically generated for maximum performance.

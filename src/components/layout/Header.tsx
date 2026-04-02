@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { PhoneIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { site } from "@/lib/site";
@@ -43,13 +44,14 @@ export function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <span className="text-xl md:text-2xl font-extrabold text-gray-900 leading-tight">
-              Sierra{" "}
-              <span className="text-[#007bff]">Heavy Duty</span>
-            </span>
-            <span className="block text-[10px] md:text-xs font-medium text-gray-500 tracking-wider -mt-0.5">
-              RV &amp; Truck Center
-            </span>
+            <Image
+              src="/images/logo-banner.png"
+              alt="Sierra Heavy Duty RV & Truck Center"
+              width={220}
+              height={50}
+              className="h-10 md:h-12 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}

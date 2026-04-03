@@ -1,9 +1,12 @@
 import { site } from "./site";
 
+export const businessEntityId = `${site.url}/#business`;
+
 export function localBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "AutoRepair",
+    "@id": businessEntityId,
     name: site.name,
     image: `${site.url}/images/og-image.jpg`,
     url: site.url,
@@ -53,6 +56,44 @@ export function localBusinessJsonLd() {
       ratingValue: "4.6",
       reviewCount: "93",
     },
+  };
+}
+
+export function servicesItemListJsonLd(
+  offerings: { title: string; description: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: offerings.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Service",
+        name: s.title,
+        description: s.description,
+        provider: { "@id": businessEntityId },
+        areaServed: {
+          "@type": "AdministrativeArea",
+          name: `${site.address.city}, ${site.address.state}`,
+        },
+      },
+    })),
+  };
+}
+
+export function breadcrumbJsonLd(
+  items: { name: string; path: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: crumb.name,
+      item: `${site.url}${crumb.path === "/" ? "" : crumb.path}`,
+    })),
   };
 }
 

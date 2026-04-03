@@ -1,16 +1,29 @@
-import type { Metadata } from "next";
 import { BookingWizard } from "@/components/booking/BookingWizard";
 import { site } from "@/lib/site";
+import { buildPageMetadata } from "@/lib/metadata";
+import { breadcrumbJsonLd } from "@/lib/schema";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Schedule Service",
   description:
     "Book an RV or truck service appointment at Sierra Heavy Duty in Sonora, CA. Pick your service, vehicle, and preferred date — we'll confirm within one business day.",
-};
+  path: "/book",
+});
 
 export default function BookPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Schedule Service", path: "/book" },
+            ])
+          ),
+        }}
+      />
       {/* Page hero */}
       <section className="bg-gray-900 text-white py-10 md:py-14">
         <div className="max-w-7xl mx-auto px-4">

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   WrenchScrewdriverIcon,
   TruckIcon,
@@ -12,12 +11,15 @@ import {
 import { Button } from "@/components/ui/Button";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { site } from "@/lib/site";
+import { buildPageMetadata } from "@/lib/metadata";
+import { breadcrumbJsonLd, servicesItemListJsonLd } from "@/lib/schema";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "RV & Truck Services",
   description:
     "Complete RV and truck service in Sonora, CA — general maintenance, suspension, collision repair, full restorations, solar installs, hitches, and more. Call (209) 532-7994.",
-};
+  path: "/rv-service",
+});
 
 const services = [
   {
@@ -150,8 +152,30 @@ const services = [
 ];
 
 export default function RVServicePage() {
+  const structuredOfferings = services.map((s) => ({
+    title: s.title,
+    description: s.description,
+  }));
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(servicesItemListJsonLd(structuredOfferings)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "RV & Truck Services", path: "/rv-service" },
+            ])
+          ),
+        }}
+      />
       {/* Page hero */}
       <section className="bg-gray-900 text-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">

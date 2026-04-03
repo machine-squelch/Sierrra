@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { site } from "@/lib/site";
 import {
@@ -7,16 +6,30 @@ import {
   MapPinIcon,
   ClockIcon,
 } from "@heroicons/react/24/outline";
+import { buildPageMetadata } from "@/lib/metadata";
+import { breadcrumbJsonLd } from "@/lib/schema";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Contact Us",
   description:
     "Contact Sierra Heavy Duty RV & Truck Center in Sonora, CA. Request service, get an estimate, or ask a question. Call (209) 532-7994 or fill out our form.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Contact", path: "/contact" },
+            ])
+          ),
+        }}
+      />
       {/* Page hero */}
       <section className="bg-gray-900 text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4">

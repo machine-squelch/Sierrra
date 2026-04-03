@@ -3,15 +3,20 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { localBusinessJsonLd } from "@/lib/schema";
+import { ogImagePath } from "@/lib/metadata";
+import { site } from "@/lib/site";
+
+const defaultTitle = "Sierra Heavy Duty | RV Repair Sonora CA";
+const defaultDescription =
+  "Expert RV repair, maintenance, parts & accessories in Sonora, CA. Family-owned shop serving the Sierra Nevada foothills. Collision repair, solar, hitches, restorations & more. Call (209) 532-7994.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sierraheavyduty.com"),
+  metadataBase: new URL(site.url),
   title: {
-    default: "Sierra Heavy Duty | RV Repair Sonora CA",
+    default: defaultTitle,
     template: "%s | Sierra Heavy Duty RV & Truck Center",
   },
-  description:
-    "Expert RV repair, maintenance, parts & accessories in Sonora, CA. Family-owned shop serving the Sierra Nevada foothills. Collision repair, solar, hitches, restorations & more. Call (209) 532-7994.",
+  description: defaultDescription,
   keywords: [
     "RV repair Sonora CA",
     "RV maintenance Sonora",
@@ -24,19 +29,36 @@ export const metadata: Metadata = {
     "RV service near me",
     "heavy duty truck repair",
   ],
+  icons: {
+    icon: "/images/sierra-heavy-duty-rv-truck-center-sonora-ca-logo-sm.webp",
+    apple: "/images/sierra-heavy-duty-rv-truck-center-sonora-ca-logo.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Sierra Heavy Duty RV & Truck Center",
-    title: "Sierra Heavy Duty | RV Repair Sonora CA",
+    siteName: site.name,
+    url: site.url,
+    title: defaultTitle,
     description:
       "Expert RV repair, maintenance, parts & accessories in Sonora, CA. Family-owned shop — call (209) 532-7994.",
+    images: [
+      {
+        url: ogImagePath,
+        width: 1200,
+        height: 630,
+        alt: `${site.shortName} — RV and truck service in Sonora, CA`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    title: defaultTitle,
+    description:
+      "Expert RV repair, maintenance, parts & accessories in Sonora, CA. Family-owned shop — call (209) 532-7994.",
+    images: [ogImagePath],
   },
   alternates: {
-    canonical: "https://sierraheavyduty.com",
+    canonical: site.url,
   },
 };
 

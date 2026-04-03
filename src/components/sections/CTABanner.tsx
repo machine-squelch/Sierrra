@@ -14,8 +14,8 @@ export function CTABanner() {
           we&apos;re at {site.address.street} in Sonora.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-3">
-          <Button href="/contact" variant="outline" size="lg">
-            Request Service
+          <Button href="/book" variant="outline" size="lg">
+            Schedule Service
           </Button>
           <Button
             href={`tel:${site.phone.primaryRaw}`}

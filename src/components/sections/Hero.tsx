@@ -31,8 +31,8 @@ export function Hero() {
             work, and more from a trusted family-owned Sonora shop.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Button href="/contact" size="lg">
-              Request Service
+            <Button href="/book" size="lg">
+              Schedule Service
             </Button>
             <Button
               href={`tel:${site.phone.primaryRaw}`}

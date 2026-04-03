@@ -164,7 +164,7 @@ export default function RVServicePage() {
             techs handle it all.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-8">
-            <Button href="/contact">Request Service</Button>
+            <Button href="/book">Schedule Service</Button>
             <Button href={`tel:${site.phone.primaryRaw}`} variant="outline">
               Call {site.phone.primary}
             </Button>

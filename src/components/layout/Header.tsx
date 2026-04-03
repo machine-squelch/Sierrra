@@ -123,8 +123,8 @@ export function Header() {
               <PhoneIcon className="w-4 h-4 text-[#007bff]" />
               {site.phone.primary}
             </a>
-            <Button href="/contact" size="sm">
-              Request Service
+            <Button href="/book" size="sm">
+              Schedule Service
             </Button>
           </div>
 
@@ -203,8 +203,8 @@ export function Header() {
               <PhoneIcon className="w-5 h-5" />
               Call {site.phone.primary}
             </Button>
-            <Button href="/contact" size="md" className="w-full">
-              Request Service
+            <Button href="/book" size="md" className="w-full">
+              Schedule Service
             </Button>
           </div>
         </nav>

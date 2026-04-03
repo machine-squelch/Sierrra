@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Website &amp; Google — Owner Checklist | Sierra Heavy Duty</title>
+    <style>
+      :root {
+        --ink: #111827;
+        --muted: #4b5563;
+        --line: #e5e7eb;
+        --accent: #007bff;
+        --paper: #ffffff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        color: var(--ink);
+        line-height: 1.5;
+        max-width: 8.25in;
+        margin: 0 auto;
+        padding: 0.55in 0.65in 0.75in;
+        background: var(--paper);
+        font-size: 10.5pt;
+      }
+      .masthead {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--ink);
+        margin-bottom: 1.25rem;
+      }
+      .masthead img {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+      }
+      .masthead-text h1 {
+        margin: 0;
+        font-size: 1.35rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .masthead-text .tag {
+        margin: 0.2rem 0 0;
+        font-size: 9pt;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .doc-title {
+        font-size: 1.55rem;
+        font-weight: 800;
+        margin: 0 0 0.35rem;
+        color: var(--ink);
+      }
+      .lede {
+        font-size: 10.5pt;
+        color: var(--muted);
+        margin: 0 0 1.25rem;
+        max-width: 38rem;
+      }
+      h2 {
+        font-size: 11.5pt;
+        margin: 1.35rem 0 0.5rem;
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid var(--line);
+        page-break-after: avoid;
+      }
+      h3 {
+        font-size: 10.5pt;
+        margin: 0.85rem 0 0.35rem;
+        color: var(--ink);
+      }
+      p,
+      li {
+        margin: 0.35rem 0;
+      }
+      ul {
+        margin: 0.25rem 0 0.5rem 1.1rem;
+        padding: 0;
+      }
+      .callout {
+        background: #f8fafc;
+        border-left: 4px solid var(--accent);
+        padding: 0.65rem 0.85rem;
+        margin: 0.75rem 0;
+        font-size: 10pt;
+        page-break-inside: avoid;
+      }
+      .checklist {
+        list-style: none;
+        margin-left: 0;
+        padding: 0;
+      }
+      .checklist li {
+        position: relative;
+        padding-left: 1.35rem;
+        margin: 0.4rem 0;
+      }
+      .checklist li::before {
+        content: "☐";
+        position: absolute;
+        left: 0;
+        font-size: 12pt;
+        line-height: 1.35;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 9.5pt;
+      }
+      .footer {
+        margin-top: 1.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--line);
+        font-size: 9pt;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      table.review-ideas {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 9.75pt;
+        margin: 0.5rem 0;
+      }
+      table.review-ideas th,
+      table.review-ideas td {
+        border: 1px solid var(--line);
+        padding: 0.4rem 0.5rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      table.review-ideas th {
+        background: #f3f4f6;
+        font-weight: 700;
+      }
+      @media print {
+        body {
+          padding: 0.45in 0.55in;
+        }
+        h2 {
+          page-break-after: avoid;
+        }
+        .callout,
+        table {
+          page-break-inside: avoid;
+        }
+        a[href^="http"]::after {
+          content: " (" attr(href) ")";
+          font-size: 8pt;
+          color: var(--muted);
+        }
+        a.no-print-url::after {
+          content: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="masthead">
+      <img src="adamslocal-logo.png" alt="AdamsLocal LLC logo" width="144" height="144" />
+      <div class="masthead-text">
+        <h1>AdamsLocal LLC</h1>
+        <p class="tag">Local web &amp; digital presence</p>
+      </div>
+    </header>
+
+    <h2 class="doc-title" style="border: none; padding: 0; margin-top: 0">
+      Website &amp; Google — Owner checklist
+    </h2>
+    <p class="lede">
+      Prepared for <strong>Sierra Heavy Duty RV &amp; Truck Center</strong> (Sonora, CA). Work through
+      the items below so your site, Google Business Profile, and customer experience stay aligned.
+      Check boxes as you complete each step.
+    </p>
+
+    <h2>1. Google Business Profile (GBP)</h2>
+    <ul class="checklist">
+      <li>Claim or verify the profile; confirm you are an authorized manager.</li>
+      <li>
+        <strong>Business name</strong> matches your legal / on-signage name (no extra keywords stuffed
+        into the title).
+      </li>
+      <li>
+        <strong>Address &amp; pin</strong> match where customers arrive; fix the map if the pin is
+        wrong.
+      </li>
+      <li>
+        <strong>Primary phone</strong> is the main shop line customers call; additional numbers added as
+        secondary if needed.
+      </li>
+      <li>
+        <strong>Website URL</strong> points to your real domain (production). Update when moving from a
+        preview domain to the final one.
+      </li>
+      <li>
+        <strong>Hours</strong> (including holiday / seasonal updates) match your website and what staff
+        tell callers.
+      </li>
+      <li>
+        Add <strong>services</strong> and <strong>photos</strong> (shop exterior, bay, team, finished
+        work) — strong trust signals.
+      </li>
+    </ul>
+
+    <h2>2. Business categories — is “AutoRepair” right?</h2>
+    <div class="callout">
+      <p style="margin-top: 0">
+        <strong>On the website (schema.org):</strong> We use <code>AutoRepair</code> plus
+        <code>LocalBusiness</code>. That is a valid type for a licensed repair shop that works on
+        motor vehicles, including RVs and trucks. It helps search engines understand “repair business at
+        this address.”
+      </p>
+      <p style="margin-bottom: 0">
+        <strong>On Google Business Profile:</strong> Categories come from <em>Google’s fixed list</em>,
+        not schema.org. Pick the <strong>one primary category</strong> that best describes your main
+        business (for example, <strong>RV repair shop</strong>, <strong>Truck repair shop</strong>, or
+        <strong>Auto repair shop</strong>, depending on what you want to rank for most). Add
+        <strong>secondary categories</strong> for other services. If unsure, choose the category that
+        matches how most customers describe you when they call.
+      </p>
+    </div>
+    <ul class="checklist">
+      <li>Review primary + secondary GBP categories with your team.</li>
+      <li>Confirm categories match the services described on your website.</li>
+    </ul>
+
+    <h2>3. Make it easy for visitors to leave a Google review</h2>
+    <p class="muted">
+      Google’s review link is unique to your business. In Google Business Profile: <em>Ask for
+      reviews</em> → copy your short link. Paste it in the blanks below and use it everywhere.
+    </p>
+    <table class="review-ideas">
+      <tr>
+        <th style="width: 28%">Tactic</th>
+        <th>What to do</th>
+      </tr>
+      <tr>
+        <td><strong>Direct link</strong></td>
+        <td>
+          Put your review URL on the website (e.g. “Review us on Google” in the footer or after
+          service). <span class="muted">Owner: paste link here: _________________________</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>QR code</strong></td>
+        <td>
+          Print a QR that opens the review link — counter card, lobby, invoice, or completion
+          paperwork.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Thank-you moment</strong></td>
+        <td>
+          When the job is done and the customer is happy, ask in person: “We’d appreciate a quick Google
+          review — I can text you the link.”
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Follow-up text / email</strong></td>
+        <td>
+          Same-day or next-day message with the link (use your normal CRM or personal process; avoid
+          bulk spam).
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Never</strong></td>
+        <td>
+          Do not offer money or gifts for reviews (against Google policy). Do not write fake reviews or
+          review your own business.
+        </td>
+      </tr>
+    </table>
+    <ul class="checklist">
+      <li>Create and save the official Google review link.</li>
+      <li>Add a visible “Leave a review” button or link on the website (footer or contact page).</li>
+      <li>Print QR code for the front counter or customer copies.</li>
+      <li>Brief staff on when and how to ask (after a positive handoff).</li>
+    </ul>
+
+    <h2>4. Keep information consistent (NAP + ratings)</h2>
+    <ul class="checklist">
+      <li>
+        <strong>Name, address, phone (NAP)</strong> are identical on the website, GBP, Facebook, and
+        printed materials.
+      </li>
+      <li>
+        If you display an average star rating or review count on the site, it should match (or be
+        clearly sourced from) what Google shows, or update the site to match.
+      </li>
+      <li>
+        When hours or phone numbers change, update <strong>Google first</strong>, then the website (or
+        ask AdamsLocal to update the site config).
+      </li>
+    </ul>
+
+    <h2>5. Domain &amp; launch</h2>
+    <ul class="checklist">
+      <li>Confirm which domain is “live” for customers vs. a temporary preview domain.</li>
+      <li>After switching to the final domain, set the correct URL in GBP and in hosting environment variables.</li>
+      <li>Test contact links: tap-to-call, email, and map directions from a phone.</li>
+    </ul>
+
+    <h2>6. Optional next steps with your web team</h2>
+    <ul class="checklist">
+      <li>Replace placeholder contact/booking forms with real email or shop management integration.</li>
+      <li>Add your Google Business Profile “share” URL into the site config for richer search connections.</li>
+      <li>Embed Google’s map widget using the real place embed code (pin accuracy).</li>
+      <li>Connect Google Search Console on the production domain to monitor visibility.</li>
+    </ul>
+
+    <div class="footer">
+      <span
+        >Prepared by <strong>AdamsLocal LLC</strong> · Website checklist for Sierra Heavy Duty RV &amp;
+        Truck Center</span
+      >
+      <span>April 2026</span>
+    </div>
+  </body>
+</html>

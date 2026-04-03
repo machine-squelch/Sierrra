@@ -45,10 +45,10 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/images/logo-banner.png"
-              alt="Sierra Heavy Duty RV & Truck Center"
-              width={220}
-              height={50}
+              src="/images/sierra-heavy-duty-rv-truck-center-sonora-ca-logo-sm.webp"
+              alt="Sierra Heavy Duty RV and Truck Center — Sonora, CA"
+              width={400}
+              height={93}
               className="h-10 md:h-12 w-auto"
               priority
             />

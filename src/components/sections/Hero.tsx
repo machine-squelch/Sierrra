@@ -14,10 +14,10 @@ export function Hero() {
         <div className="flex flex-col items-center text-center">
           {/* Logo banner */}
           <Image
-            src="/images/logo-banner.png"
-            alt="Sierra Heavy Duty RV & Truck Center"
-            width={800}
-            height={180}
+            src="/images/sierra-heavy-duty-rv-truck-center-sonora-ca-logo.webp"
+            alt="Sierra Heavy Duty RV and Truck Center — RV repair, maintenance, parts and accessories in Sonora, CA"
+            width={1200}
+            height={278}
             className="w-full max-w-2xl h-auto mb-8 drop-shadow-2xl"
             priority
           />

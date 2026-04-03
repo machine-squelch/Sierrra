@@ -1,8 +1,35 @@
+const PRODUCTION_SITE_URL = "https://sierraheavyduty.com";
+
+function normalizeSiteUrl(raw: string): string {
+  const trimmed = raw.trim().replace(/\/+$/, "");
+  if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://")) {
+    return `https://${trimmed}`;
+  }
+  return trimmed;
+}
+
+/** Canonical origin for metadata, JSON-LD, sitemap, and llms routes. Set NEXT_PUBLIC_SITE_URL for a temporary or alternate domain (e.g. preview for the owner). */
+export function resolveSiteUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL;
+  if (fromEnv?.trim()) {
+    return normalizeSiteUrl(fromEnv);
+  }
+  return PRODUCTION_SITE_URL;
+}
+
 export const site = {
   name: "Sierra Heavy Duty RV & Truck Center",
   shortName: "Sierra Heavy Duty",
-  domain: "sierraheavyduty.com",
-  url: "https://sierraheavyduty.com",
+  get url() {
+    return resolveSiteUrl();
+  },
+  get domain() {
+    try {
+      return new URL(this.url).hostname;
+    } catch {
+      return "sierraheavyduty.com";
+    }
+  },
   tagline: "We fix it right so you can keep adventuring.",
   phone: {
     primary: "(209) 532-7994",
@@ -35,4 +62,4 @@ export const site = {
     facebook:
       "https://www.facebook.com/people/Sierra-Heavy-Duty-RV-and-Truck-Center/100063723755765/",
   },
-} as const;
+};

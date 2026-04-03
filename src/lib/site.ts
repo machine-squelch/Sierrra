@@ -67,7 +67,19 @@ export const site = {
    * Add when available so JSON-LD `sameAs` matches GBP — improves entity consistency for Google.
    */
   googleBusinessProfileUrl: "",
+  /**
+   * Google “Ask for reviews” URL. Prefer `NEXT_PUBLIC_GOOGLE_REVIEW_URL` in Vercel
+   * so you can update without a code change; this field is the repo fallback.
+   */
+  googleReviewUrl: "",
 };
+
+/** GBP review link: env overrides `site.googleReviewUrl`. */
+export function resolveGoogleReviewUrl(): string {
+  const env = process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL?.trim();
+  if (env) return env;
+  return site.googleReviewUrl.trim();
+}
 
 /** Profile URLs that represent the same organization (schema.org `sameAs`). */
 export function sameAsProfileUrls(): string[] {

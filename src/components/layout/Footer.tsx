@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
+import { GoogleReviewCta } from "@/components/ui/GoogleReviewCta";
 
 export function Footer() {
   return (
@@ -103,6 +104,7 @@ export function Footer() {
               ))}
             </dl>
             <div className="flex flex-col gap-2 mt-4 text-sm">
+              <GoogleReviewCta variant="footer" />
               <a
                 href={site.address.googleMapsLink}
                 target="_blank"

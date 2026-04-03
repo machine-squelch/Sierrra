@@ -4,6 +4,7 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/outline";
 import { ReviewCard } from "@/components/ui/ReviewCard";
+import { GoogleReviewCta } from "@/components/ui/GoogleReviewCta";
 import { reviews } from "@/lib/reviews";
 import { site } from "@/lib/site";
 
@@ -92,6 +93,7 @@ export function TrustSection() {
               <ReviewCard key={review.author} review={review} />
             ))}
           </div>
+          <GoogleReviewCta variant="trust" />
         </div>
       </div>
     </section>

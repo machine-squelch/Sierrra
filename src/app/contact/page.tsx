@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/sections/ContactForm";
-import { site } from "@/lib/site";
+import { GoogleReviewCta } from "@/components/ui/GoogleReviewCta";
+import { site, resolveGoogleReviewUrl } from "@/lib/site";
 import {
   PhoneIcon,
   EnvelopeIcon,
@@ -141,6 +142,18 @@ export default function ContactPage() {
                   </dl>
                 </div>
               </div>
+
+              {resolveGoogleReviewUrl() ? (
+                <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+                  <h3 className="font-semibold text-gray-900 mb-2">
+                    Happy with our service?
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    A short Google review helps other RV and truck owners find us.
+                  </p>
+                  <GoogleReviewCta variant="contact" />
+                </div>
+              ) : null}
 
               {/* Map */}
               <div className="rounded-xl overflow-hidden border border-gray-200">

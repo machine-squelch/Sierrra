@@ -19,6 +19,15 @@ Sierra Heavy Duty is an AutoRepair / RV service business in Sonora, Tuolumne Cou
 - **Email:** ${site.email}
 - **Website:** ${u}/
 
+## Google Business Profile (entity consistency)
+
+Use the **exact** business name, address, and primary phone on the website, in JSON-LD, and in Google Business Profile. Mismatches hurt local SEO and AI summaries.
+
+- **Maps place (verify pin):** ${site.address.googleMapsLink}
+- **Structured data:** WebSite + LocalBusiness (@graph) on every page; \`sameAs\` includes Facebook and this Maps URL. Add your GBP “share” URL to \`site.googleBusinessProfileUrl\` in code when you have it.
+- **Hours & holiday hours:** Update \`site.hours\` and schema \`openingHoursSpecification\` whenever GBP changes.
+- **Ratings:** \`aggregateRating\` in JSON-LD should match what you display on the site and what Google shows (or remove it until it does).
+
 ## Hours
 
 - Monday–Friday: 8:00 AM – 5:30 PM
@@ -46,7 +55,7 @@ Customers can book online or call. Services include:
 
 ## Machine-readable metadata
 
-JSON-LD (AutoRepair, FAQPage on home, ItemList of Service on /rv-service, BreadcrumbList on inner pages) is embedded in HTML on the live site.
+JSON-LD: WebSite + LocalBusiness @graph (root layout), FAQPage (home), ItemList of Service (/rv-service), BreadcrumbList (inner pages).
 `;
 
   return new NextResponse(body, {

@@ -5,6 +5,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ReviewCard } from "@/components/ui/ReviewCard";
 import { reviews } from "@/lib/reviews";
+import { site } from "@/lib/site";
 
 const trustPoints = [
   {
@@ -70,8 +71,21 @@ export function TrustSection() {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-3">
             What Our Customers Say
           </h2>
-          <p className="text-center text-gray-600 mb-8">
-            4.6 stars across 93+ reviews
+          <p className="text-center text-gray-600 mb-2 max-w-2xl mx-auto">
+            Summary reflects public feedback (e.g. Google). Keep this page and
+            structured data in sync with your{" "}
+            <a
+              href={site.address.googleMapsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#007bff] font-medium hover:underline"
+            >
+              Google Business Profile
+            </a>{" "}
+            for ratings, hours, and NAP.
+          </p>
+          <p className="text-center text-gray-500 text-sm mb-8">
+            Quotes below are illustrative summaries — see current reviews on Google Maps.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((review) => (

@@ -25,8 +25,9 @@ export function GET() {
 
 ## Optional
 
+- [Google Maps (verify NAP vs GBP)](${site.address.googleMapsLink})
 - [Facebook](${site.social.facebook})
-- Extended site summary: ${u}/llms-full.txt
+- Extended site summary (GBP alignment notes): ${u}/llms-full.txt
 `;
 
   return new NextResponse(body, {

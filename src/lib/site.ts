@@ -62,4 +62,19 @@ export const site = {
     facebook:
       "https://www.facebook.com/people/Sierra-Heavy-Duty-RV-and-Truck-Center/100063723755765/",
   },
+  /**
+   * Public Google Business Profile URL (e.g. https://g.page/... or Maps “Share” link).
+   * Add when available so JSON-LD `sameAs` matches GBP — improves entity consistency for Google.
+   */
+  googleBusinessProfileUrl: "",
 };
+
+/** Profile URLs that represent the same organization (schema.org `sameAs`). */
+export function sameAsProfileUrls(): string[] {
+  const urls = [
+    site.social.facebook,
+    site.address.googleMapsLink,
+    site.googleBusinessProfileUrl?.trim(),
+  ].filter(Boolean) as string[];
+  return [...new Set(urls)];
+}

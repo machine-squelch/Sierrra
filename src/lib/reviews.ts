@@ -6,8 +6,8 @@ export type Review = {
   source: "google" | "yelp" | "facebook";
 };
 
-// Placeholder reviews based on real review summaries.
-// Replace with live Google Places API integration when ready.
+// Illustrative quotes (paraphrased themes). For strongest E-E-A-T, replace with the
+// Google Places API / GBP widget or verbatim quotes you have permission to use.
 export const reviews: Review[] = [
   {
     author: "Mike T.",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { localBusinessJsonLd } from "@/lib/schema";
+import { siteJsonLdGraph } from "@/lib/schema";
 import { ogImagePath } from "@/lib/metadata";
 import { site } from "@/lib/site";
 
@@ -73,7 +73,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessJsonLd()),
+            __html: JSON.stringify(siteJsonLdGraph()),
           }}
         />
       </head>

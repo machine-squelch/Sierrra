@@ -25,19 +25,19 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               {[
-                "General Maintenance",
-                "Suspension Repair",
-                "Interior Appliance Repair",
-                "Collision Repair",
-                "Full Restorations",
-                "Solar & Batteries",
+                { name: "General Maintenance", anchor: "general-maintenance" },
+                { name: "Suspension Repair", anchor: "suspension" },
+                { name: "Interior Appliance Repair", anchor: "interior-appliance" },
+                { name: "Collision Repair", anchor: "collision" },
+                { name: "Full Restorations", anchor: "restorations" },
+                { name: "Solar & Batteries", anchor: "solar" },
               ].map((s) => (
-                <li key={s}>
+                <li key={s.anchor}>
                   <Link
-                    href="/rv-service"
+                    href={`/rv-service#${s.anchor}`}
                     className="hover:text-white transition-colors"
                   >
-                    {s}
+                    {s.name}
                   </Link>
                 </li>
               ))}

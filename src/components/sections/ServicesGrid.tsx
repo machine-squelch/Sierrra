@@ -86,7 +86,7 @@ export function ServicesGrid() {
               id={service.id}
               title={service.title}
               description={service.description}
-              href="/rv-service"
+              href={`/rv-service#${service.id}`}
               icon={service.icon}
             />
           ))}

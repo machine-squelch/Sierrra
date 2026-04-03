@@ -1,0 +1,19 @@
+{
+  "slides": [
+    {
+      "src": "/images/gallery/sierra-heavy-duty-sonora-location-wide.webp",
+      "alt": "Sierra Heavy Duty RV and Truck Center — Sonora, California shop",
+      "caption": "Family-owned RV & truck repair in Sonora"
+    },
+    {
+      "src": "/images/gallery/sierra-heavy-duty-shop-work-area-west.webp",
+      "alt": "Sierra Heavy Duty — service and work area",
+      "caption": "Service bay & work area"
+    },
+    {
+      "src": "/images/gallery/sierra-heavy-duty-shop-work-area-east.webp",
+      "alt": "Sierra Heavy Duty — RV and truck service",
+      "caption": "RV & heavy truck service"
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import {
@@ -71,28 +74,68 @@ const services = [
 ];
 
 export function ServicesGrid() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section id="services" className="py-16 md:py-24 bg-gray-50">
+    <section id="services" className="py-14 md:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
-        <SectionHeading
-          title="How We Keep You on the Road"
-          subtitle="From routine maintenance to full restorations, our shop handles every RV and truck job under one roof."
-        />
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <SectionHeading
+            title="How We Keep You on the Road"
+            subtitle="From routine maintenance to full restorations, our shop handles every RV and truck job under one roof."
+          />
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mt-10 md:mt-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: reduceMotion ? 0 : 0.06,
+                delayChildren: reduceMotion ? 0 : 0.05,
+              },
+            },
+          }}
+        >
           {services.map((service) => (
-            <ServiceCard
+            <motion.div
               key={service.id}
-              id={service.id}
-              title={service.title}
-              description={service.description}
-              href={`/rv-service#${service.id}`}
-              icon={service.icon}
-            />
+              variants={{
+                hidden: { opacity: 0, y: reduceMotion ? 0 : 14 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+            >
+              <ServiceCard
+                id={service.id}
+                title={service.title}
+                description={service.description}
+                href={`/rv-service#${service.id}`}
+                icon={service.icon}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <p className="mt-8 text-center text-sm text-gray-600 bg-blue-50 border border-blue-100 rounded-lg py-3 px-4 max-w-xl mx-auto">
+        <motion.p
+          className="mt-8 text-center text-sm text-gray-600 bg-blue-50 border border-blue-100 rounded-lg py-3 px-4 max-w-xl mx-auto"
+          initial={reduceMotion ? false : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15, duration: 0.35 }}
+        >
           <span className="font-semibold text-[#007bff]">
             Emergency mobile service available
           </span>{" "}
@@ -103,7 +146,7 @@ export function ServicesGrid() {
           >
             (209) 532-7994
           </a>
-        </p>
+        </motion.p>
       </div>
     </section>
   );

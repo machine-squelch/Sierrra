@@ -94,8 +94,8 @@ docker run -p 3000:3000 sierra-heavy-duty
 ### Business Info
 Edit `src/lib/site.ts` to update address, phone numbers, hours, and social links.
 
-### Hero Image
-Place a hero background image at `public/images/hero-bg.jpg`. The hero section uses it as a CSS background with an overlay.
+### Hero & shop photos
+Drop originals in `public/images/gallery/_raw/`, then run `npm run images:optimize`. That writes WebP slides to `public/images/gallery/`, updates `src/lib/gallery-data.json`, and builds `public/images/hero-bg.jpg` from the first photo (or from `og-image.jpg` if `_raw/` is empty).
 
 ### Reviews
 Edit `src/lib/reviews.ts` to update placeholder reviews, or integrate with the Google Places API for live reviews.

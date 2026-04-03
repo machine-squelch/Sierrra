@@ -1,4 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
+
+const MotionLink = motion.create(Link);
 
 type ButtonProps = {
   href?: string;
@@ -7,7 +12,15 @@ type ButtonProps = {
   children: React.ReactNode;
   className?: string;
   external?: boolean;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className">;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  name?: string;
+  value?: string | readonly string[] | number;
+  form?: string;
+  title?: string;
+  "aria-label"?: string;
+};
 
 const variants = {
   primary:
@@ -32,28 +45,59 @@ export function Button({
   children,
   className = "",
   external,
-  ...props
+  type = "button",
+  disabled,
+  onClick,
+  name,
+  value,
+  form,
+  title,
+  "aria-label": ariaLabel,
 }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 cursor-pointer ${variants[variant]} ${sizes[size]} ${className}`;
+  const reduceMotion = useReducedMotion();
+  const classes = `inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors duration-200 cursor-pointer ${variants[variant]} ${sizes[size]} ${className}`;
+  const tap = reduceMotion ? undefined : { scale: 0.98 };
 
   if (href) {
     if (external || href.startsWith("tel:") || href.startsWith("mailto:")) {
       return (
-        <a href={href} className={classes}>
+        <motion.a
+          href={href}
+          className={classes}
+          whileTap={tap}
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        >
           {children}
-        </a>
+        </motion.a>
       );
     }
     return (
-      <Link href={href} className={classes}>
+      <MotionLink
+        href={href}
+        className={classes}
+        whileTap={tap}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+      >
         {children}
-      </Link>
+      </MotionLink>
     );
   }
 
   return (
-    <button className={classes} {...props}>
+    <motion.button
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+      name={name}
+      value={value}
+      form={form}
+      title={title}
+      aria-label={ariaLabel}
+      className={classes}
+      whileTap={tap}
+      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+    >
       {children}
-    </button>
+    </motion.button>
   );
 }

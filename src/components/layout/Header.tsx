@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { PhoneIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { site } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
@@ -19,6 +20,7 @@ const serviceAnchors = [
 ];
 
 export function Header() {
+  const reduceMotion = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>(null);
@@ -84,22 +86,36 @@ export function Header() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </Link>
-              {dropdownOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-2 min-w-[240px] z-50">
-                  {serviceAnchors.map((s) => (
-                    <Link
-                      key={s.anchor}
-                      href={`/rv-service${s.anchor}`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#007bff] transition-colors"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      {s.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={reduceMotion ? false : { opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-2 min-w-[240px] z-50"
+                  >
+                    {serviceAnchors.map((s) => (
+                      <Link
+                        key={s.anchor}
+                        href={`/rv-service${s.anchor}`}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#007bff] transition-colors"
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        {s.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
+            <Link
+              href="/#gallery"
+              className="text-sm font-medium text-gray-700 hover:text-[#007bff] transition-colors"
+            >
+              Gallery
+            </Link>
             <Link
               href="/#about"
               className="text-sm font-medium text-gray-700 hover:text-[#007bff] transition-colors"
@@ -152,63 +168,79 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <nav className="lg:hidden bg-white border-t border-gray-100 pb-4">
-          <Link
-            href="/"
-            className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50"
-            onClick={() => setMobileOpen(false)}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.nav
+            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={reduceMotion ? undefined : { opacity: 0, height: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
           >
-            Home
-          </Link>
-          <Link
-            href="/rv-service"
-            className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50"
-            onClick={() => setMobileOpen(false)}
-          >
-            Services
-          </Link>
-          {serviceAnchors.map((s) => (
-            <Link
-              key={s.anchor}
-              href={`/rv-service${s.anchor}`}
-              className="block px-10 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-[#007bff]"
-              onClick={() => setMobileOpen(false)}
-            >
-              {s.name}
-            </Link>
-          ))}
-          <Link
-            href="/#about"
-            className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50"
-            onClick={() => setMobileOpen(false)}
-          >
-            About
-          </Link>
-          <Link
-            href="/contact"
-            className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50"
-            onClick={() => setMobileOpen(false)}
-          >
-            Contact
-          </Link>
-          <div className="px-6 pt-3 space-y-2">
-            <Button
-              href={`tel:${site.phone.primaryRaw}`}
-              variant="secondary"
-              size="md"
-              className="w-full"
-            >
-              <PhoneIcon className="w-5 h-5" />
-              Call {site.phone.primary}
-            </Button>
-            <Button href="/book" size="md" className="w-full">
-              Schedule Service
-            </Button>
-          </div>
-        </nav>
-      )}
+            <div className="pb-4">
+              <Link
+                href="/"
+                className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100"
+                onClick={() => setMobileOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href="/rv-service"
+                className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100"
+                onClick={() => setMobileOpen(false)}
+              >
+                Services
+              </Link>
+              {serviceAnchors.map((s) => (
+                <Link
+                  key={s.anchor}
+                  href={`/rv-service${s.anchor}`}
+                  className="block px-10 py-2.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-[#007bff] active:bg-gray-100"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {s.name}
+                </Link>
+              ))}
+              <Link
+                href="/#gallery"
+                className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100"
+                onClick={() => setMobileOpen(false)}
+              >
+                Gallery
+              </Link>
+              <Link
+                href="/#about"
+                className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100"
+                onClick={() => setMobileOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                href="/contact"
+                className="block px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100"
+                onClick={() => setMobileOpen(false)}
+              >
+                Contact
+              </Link>
+              <div className="px-6 pt-3 space-y-2">
+                <Button
+                  href={`tel:${site.phone.primaryRaw}`}
+                  variant="secondary"
+                  size="md"
+                  className="w-full"
+                >
+                  <PhoneIcon className="w-5 h-5" />
+                  Call {site.phone.primary}
+                </Button>
+                <Button href="/book" size="md" className="w-full">
+                  Schedule Service
+                </Button>
+              </div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

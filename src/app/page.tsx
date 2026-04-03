@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { ShopGallery } from "@/components/sections/ShopGallery";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { TrustSection } from "@/components/sections/TrustSection";
 import { FAQ, faqs } from "@/components/sections/FAQ";
@@ -23,6 +24,7 @@ export default function Home() {
         }}
       />
       <Hero />
+      <ShopGallery />
       <ServicesGrid />
       <TrustSection />
       <FAQ />
